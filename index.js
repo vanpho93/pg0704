@@ -33,3 +33,5 @@ app.get('/admin/xoa/:id', (req, res) => {
         res.redirect('/admin');
     });
 });
+
+//https://github.com/hongocnhan/yunstore_demo
