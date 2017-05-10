@@ -12,13 +12,6 @@ const config = {
 
 const pool = new pg.Pool(config);
 
-// pool.connect((err, client) => {
-//     if (err) return console.log(err);
-//     client.query('SELECT * FROM "Product"', (errQuery, result) => {
-//         if (errQuery) return console.log(errQuery);
-//         console.log(result.rows);
-//     });
-// });
 const queryDB = (sql, cb) => {
     pool.connect((err, client) => {
         if (err) return cb(err, undefined);
@@ -28,35 +21,5 @@ const queryDB = (sql, cb) => {
         });
     });
 }
-// queryDB('SELECT * FROM "Product"', (err, result)=> {
-//     if (err) return console.log('LOIIII');
-//     console.log(result.rows);
-// });
 
-const getAllProduct = (cb) => {
-    const sql = 'SELECT * FROM "Product"';
-    queryDB(sql, (err, result) => {
-        if (err) return cb(err);
-        cb(undefined, result.rows);
-    });
-}
-
-const insertProduct = (name, desc, image, idVideo, cb) => {
-    const sql = `INSERT INTO "Product"(name, "desc", image, "idVideo") VALUES 
-                ('${name}', '${desc}', '${image}', '${idVideo}')`;
-    queryDB(sql, (err, result) => {
-        if (err) return cb(err);
-        cb(undefined);
-    });
-};
-
-const removeProduct = (id, cb) => {
-    const sql = `DELETE FROM "Product" WHERE id = ${id}`;
-    queryDB(sql, (err, result) => {
-        if (err) return cb(err);
-        cb(undefined);
-    });
-};
-
-
-module.exports = { getAllProduct, insertProduct, removeProduct };
+module.exports = { getAllProduct, insertProduct, removeProduct, queryDB };

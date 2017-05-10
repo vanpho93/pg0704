@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const { getAllProduct, insertProduct,removeProduct } = require('./db');
+const Product = require('./model/Product');
 
 const parser = bodyParser.urlencoded({ extended: false });
 const app = express();
@@ -12,7 +12,7 @@ app.set('views', './views');
 app.use(express.static('public'));
 
 app.get('/admin', (req, res) => {
-    getAllProduct((err, rows) => {
+    Product.getAllProduct((err, rows) => {
         if (err) return res.send('LOI' + err);
         res.render('admin', { mang: rows })
     });
@@ -20,7 +20,8 @@ app.get('/admin', (req, res) => {
 
 app.post('/admin/addProduct', parser, (req, res) => {
     const { name, desc, image, idVideo } = req.body;
-    insertProduct(name, desc, image, idVideo, err => {
+    const product = new Product(undefined, name, desc, image, idVideo);
+    product.add(err => {
         if (err) return res.send('CO LOI');
         res.redirect('/admin');
     });
