@@ -48,6 +48,15 @@ const insertProduct = (name, desc, image, idVideo, cb) => {
         if (err) return cb(err);
         cb(undefined);
     });
-}
+};
 
-module.exports = { getAllProduct, insertProduct };
+const removeProduct = (id, cb) => {
+    const sql = `DELETE FROM "Product" WHERE id = ${id}`;
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        cb(undefined);
+    });
+};
+
+
+module.exports = { getAllProduct, insertProduct, removeProduct };

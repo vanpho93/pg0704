@@ -28,19 +28,19 @@
                     <td><img src="images/background/<%= e.image %>"/></td>
                     <td><%= e.idVideo %></td>
                     <td>
-                        <a href="/sua/<%= i %>">SUA</a>
+                        <a href="admin/sua/<%= e.id %>">SUA</a>
                         <br /><br />
-                        <a href="/xoa/<%= i %>" onclick="return confirm('Are you sure you want to delete this item?');">XOA</a>
+                        <a href="admin/xoa/<%= e.id %>" onclick="return confirm('Are you sure you want to delete this item?');">XOA</a>
                     </td>
                 </tr>
             <% }); %>
         </table>
-        <form action="/admin/addProduct" method="POST" enctype="multipart/form-data">
+        <form action="/admin/addProduct" method="POST">
             <input type="text" placeholder="Enter name" name="name" />
             <br /><br />
             <input type="text" placeholder="Enter desc" name="desc" />
             <br /><br />
-            <input type="text" name="hinhdaidien" />
+            <input type="text" name="image" />
             <br /><br />
             <input type="text" placeholder="Enter idVideo" name="idVideo" />
             <br /><br />
