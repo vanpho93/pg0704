@@ -41,4 +41,13 @@ const getAllProduct = (cb) => {
     });
 }
 
-module.exports = queryDB;
+const insertProduct = (name, desc, image, idVideo, cb) => {
+    const sql = `INSERT INTO "Product"(name, "desc", image, "idVideo") VALUES 
+                ('${name}', '${desc}', '${image}', '${idVideo}')`;
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        cb(undefined);
+    });
+}
+
+module.exports = { getAllProduct, insertProduct };
