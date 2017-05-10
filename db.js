@@ -19,7 +19,7 @@ const pool = new pg.Pool(config);
 //         console.log(result.rows);
 //     });
 // });
-function queryDB(sql, cb) {
+const queryDB = (sql, cb) => {
     pool.connect((err, client) => {
         if (err) return cb(err, undefined);
         client.query(sql, (errQuery, result) => {
@@ -32,5 +32,13 @@ function queryDB(sql, cb) {
 //     if (err) return console.log('LOIIII');
 //     console.log(result.rows);
 // });
+
+const getAllProduct = (cb) => {
+    const sql = 'SELECT * FROM "Product"';
+    queryDB(sql, (err, result) => {
+        if (err) return cb(err);
+        cb(undefined, result.rows);
+    });
+}
 
 module.exports = queryDB;
